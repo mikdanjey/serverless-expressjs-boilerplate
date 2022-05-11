@@ -1,0 +1,25 @@
+service: serverless-expressjs-boilerplate
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  memorySize: 2048
+  stage: dev
+  region: us-east-1
+  timeout: 30
+
+functions:
+  app-api:
+    handler: handler.handler
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: any
+          cors: true
+    environment:
+      variable1: "DB Password"
